@@ -3,6 +3,7 @@ package org.diverproject.scarlet.util;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -225,6 +226,32 @@ public class TestStringUtils
 
 		for (char c : StringUtils.genCode(20, pattern).toCharArray())
 			assertTrue(pattern.contains(Character.toString(c)));
+	}
+
+	@Test
+	@DisplayName("Capitalize")
+	public void testCapitalize()
+	{
+		assertNull(StringUtils.capitalize(null));
+		assertEquals("", StringUtils.capitalize(""));
+		assertEquals("A", StringUtils.capitalize("a"));
+		assertEquals("Ab", StringUtils.capitalize("ab"));
+		assertEquals("Ab", StringUtils.capitalize("Ab"));
+		assertEquals("AB", StringUtils.capitalize("aB"));
+		assertEquals("AB", StringUtils.capitalize("AB"));
+	}
+
+	@Test
+	@DisplayName("Uncapitalize")
+	public void testUncapitalize()
+	{
+		assertNull(StringUtils.uncapitalize(null));
+		assertEquals("", StringUtils.uncapitalize(""));
+		assertEquals("a", StringUtils.uncapitalize("A"));
+		assertEquals("ab", StringUtils.uncapitalize("ab"));
+		assertEquals("ab", StringUtils.uncapitalize("Ab"));
+		assertEquals("aB", StringUtils.uncapitalize("aB"));
+		assertEquals("aB", StringUtils.uncapitalize("AB"));
 	}
 
 	@Test

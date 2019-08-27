@@ -49,7 +49,10 @@
 
 # Logs
 
-## 2019-07-03
+## 2019-08-27
+
+### 0.1.0.2
+- Added capitalize() and uncapitalize() methods on StringUtils.
 
 ### 0.1.0.1
 - Initial project version.

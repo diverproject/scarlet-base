@@ -461,6 +461,22 @@ public class StringUtils
 		return substrAt(str, index) + c + str.substring(index);
 	}
 
+	public static String capitalize(String string)
+	{
+		if (string == null || string.isEmpty())
+			return string;
+
+		return string.substring(0, 1).toUpperCase() + string.substring(1);
+	}
+
+	public static String uncapitalize(String string)
+	{
+		if (string == null || string.isEmpty())
+			return string;
+
+		return string.substring(0, 1).toLowerCase() + string.substring(1);
+	}
+
 	public static String insert(String str, String insertString, int index)
 	{
 		if (index < 0 || index > str.length())
