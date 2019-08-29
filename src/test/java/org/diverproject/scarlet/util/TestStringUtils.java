@@ -255,6 +255,40 @@ public class TestStringUtils
 	}
 
 	@Test
+	@DisplayName("Var lower case")
+	public void testVarLowerCase()
+	{
+		assertNull(StringUtils.varLowerCase(null));
+		assertEquals("", StringUtils.varLowerCase(""));
+		assertEquals("var", StringUtils.varLowerCase("VAR"));
+		assertEquals("varName", StringUtils.varLowerCase("VAR_NAME"));
+		assertEquals("varName05", StringUtils.varLowerCase("VAR_NAME05"));
+		assertEquals("varName05", StringUtils.varLowerCase("VAR_NAME_05"));
+
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("var"); });
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("varName"); });
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("var@"); });
+	}
+
+	@Test
+	@DisplayName("Var uppert case")
+	public void testVarUpperCase()
+	{
+		assertNull(StringUtils.varUpperCase(null));
+		assertEquals("", StringUtils.varUpperCase(""));
+		assertEquals("VAR", StringUtils.varUpperCase("var"));
+		assertEquals("VAR_NAME", StringUtils.varUpperCase("varName"));
+		assertEquals("VAR_NAME_05", StringUtils.varUpperCase("varName05"));
+		assertEquals("VAR_NAME_05", StringUtils.varUpperCase("varName_05"));
+		assertEquals("VAR_NAME_05", StringUtils.varUpperCase("varName__05"));
+
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("@"); });
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("var@"); });
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("VAR@"); });
+		assertThrows(StringUtilsRuntimeException.class, () -> { StringUtils.varLowerCase("05@"); });
+	}
+
+	@Test
 	@DisplayName("Insert char inside")
 	public void testInsert()
 	{

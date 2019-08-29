@@ -23,6 +23,8 @@ import static org.diverproject.scarlet.util.language.StringUtilsLanguage.SPLIT_L
 import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_SEQUENCE_EMPTY;
 import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_SEQUENCE_NULL;
 import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_STRING;
+import static org.diverproject.scarlet.util.language.StringUtilsLanguage.VAR_LOWER_CASE;
+import static org.diverproject.scarlet.util.language.StringUtilsLanguage.VAR_UPPER_CASE;
 
 import java.text.Normalizer;
 import java.util.Arrays;
@@ -475,6 +477,72 @@ public class StringUtils
 			return string;
 
 		return string.substring(0, 1).toLowerCase() + string.substring(1);
+	}
+
+	public static String varLowerCase(String string)
+	{
+		if (StringUtils.isEmpty(string))
+			return string;
+
+		if (!string.matches("[A-Z0-9_]+"))
+			throw new StringUtilsRuntimeException(VAR_LOWER_CASE, string);
+
+		String splitted[] = string.split("_");
+		String parsed = "";
+
+		for (int i = 0; i < splitted.length; i++)
+		{
+			if (i != 0)
+				parsed += StringUtils.capitalize(splitted[i].toLowerCase());
+			else
+				parsed += splitted[i].toLowerCase();
+		}
+
+		return parsed;
+	}
+
+	public static String varUpperCase(String string)
+	{
+		if (StringUtils.isEmpty(string))
+			return string;
+
+		if (!string.matches("[A-Za-z0-9_]+"))
+			throw new StringUtilsRuntimeException(VAR_UPPER_CASE, string);
+
+		boolean underline = false;
+		boolean underlined = false;
+		String parsed = "";
+
+		for (int i = 0; i < string.length(); i++)
+		{
+			if (i > 0 && (
+					Character.isUpperCase(string.charAt(i)) ||
+					Character.isDigit(string.charAt(i))
+				)
+			)
+			{
+				underline = (
+					(Character.isDigit(string.charAt(i)) && !Character.isDigit(string.charAt(i - 1))) ||
+					(i < string.length() - 1 && Character.isLowerCase(string.charAt(i + 1)))
+				);
+
+				if (underline)
+				{
+					if (!underlined)
+						parsed += "_";
+
+					underline = false;
+					underlined = false;
+				}
+			}
+
+			parsed += Character.toUpperCase(string.charAt(i));
+			underlined = underline;
+		}
+
+		parsed = parsed.replaceAll("[_]+", "_");
+
+		return parsed;
 	}
 
 	public static String insert(String str, String insertString, int index)

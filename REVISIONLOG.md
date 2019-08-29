@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-08-29
+
+### 0.1.0.3
+- Added varLowerCase() and varUpperCase() on StringUtils.
+
 ## 2019-08-27
 
 ### 0.1.0.2

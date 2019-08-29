@@ -6,6 +6,9 @@ import org.diverproject.scarlet.language.LanguageAutoloader;
 @LanguageAutoloader
 public enum StringUtilsLanguage implements Language
 {
+	VAR_LOWER_CASE("invalid varname on upper case to lower case (string: %s)"),
+	VAR_UPPER_CASE("invalid varname on lower case to upper case (string: %s)"),
+
 	TRIM_STRING("trim null String"),
 	TRIM_SEQUENCE_NULL("trim null String sequence"),
 	TRIM_SEQUENCE_EMPTY("trim with empty String sequence"),
