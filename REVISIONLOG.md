@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-09-09
+
+### 0.1.0.4
+- Added Bitwise.toString() static method to describe a bitwise properties.
+
 ## 2019-08-29
 
 ### 0.1.0.3

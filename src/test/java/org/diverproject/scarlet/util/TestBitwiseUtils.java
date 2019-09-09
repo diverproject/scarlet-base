@@ -1,9 +1,9 @@
 package org.diverproject.scarlet.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.diverproject.scarlet.util.BitwiseUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -376,5 +376,22 @@ public class TestBitwiseUtils
 		assertFalse(BitwiseUtils.has(all, first));
 		assertFalse(BitwiseUtils.has(all, second));
 		assertFalse(BitwiseUtils.has(all, third));
+	}
+
+	@Test
+	@DisplayName("To string properties")
+	public void testToString()
+	{
+		String properties[] = new String[] { "A", "B", "C" };
+
+		assertEquals("", BitwiseUtils.toString(0x00, properties));
+		assertEquals("A", BitwiseUtils.toString(0x01, properties));
+		assertEquals("B", BitwiseUtils.toString(0x02, properties));
+		assertEquals("A|B", BitwiseUtils.toString(0x03, properties));
+		assertEquals("C", BitwiseUtils.toString(0x04, properties));
+		assertEquals("A|C", BitwiseUtils.toString(0x05, properties));
+		assertEquals("B|C", BitwiseUtils.toString(0x06, properties));
+		assertEquals("A|B|C", BitwiseUtils.toString(0x07, properties));
+		assertEquals("", BitwiseUtils.toString(0x08, properties));
 	}
 }

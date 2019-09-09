@@ -61,4 +61,15 @@ public class BitwiseUtils
 	{
 		return (value -= value & propertie);
 	}
+
+	public static String toString(int value, String[] properties)
+	{
+		StringBuilder builder = new StringBuilder();
+
+		for (int i = 0; i < properties.length; i++)
+			if (has(value, 1 << i))
+				builder.append(properties[i]+ "|");
+
+		return builder.length() == 0 ? "" : StringUtils.substr(builder.toString(), 0, -1);
+	}
 }
