@@ -14,7 +14,7 @@ public class ScarletUtils
 		return StringUtils.getSimpleNameOf(obj.getClass().getSimpleName());
 	}
 
-	public static <T> T nvl(Class<T> clazz, T value, T nullValue)
+	public static <T> T nvl(T value, T nullValue)
 	{
 		return value == null ? nullValue : value;
 	}

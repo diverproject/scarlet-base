@@ -3,7 +3,6 @@ package org.diverproject.scarlet.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.diverproject.scarlet.util.ScarletUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +13,9 @@ public class TestScarletUtils
 	@DisplayName("NVL")
 	public void testNvl()
 	{
-		assertEquals(ScarletUtils.nvl(Integer.class, 1, 1), 1);
-		assertEquals(ScarletUtils.nvl(Integer.class, 1, null), 1);
-		assertEquals(ScarletUtils.nvl(Integer.class, null, 1), 1);
-		assertNull(ScarletUtils.nvl(Integer.class, null, null));
+		assertEquals(ScarletUtils.nvl(1, 1), 1);
+		assertEquals(ScarletUtils.nvl(1, null), 1);
+		assertEquals(ScarletUtils.nvl(null, 1), 1);
+		assertNull(ScarletUtils.nvl(null, null));
 	}
 }

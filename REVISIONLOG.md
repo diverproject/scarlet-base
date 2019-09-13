@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-09-13
+
+### 0.1.0.5
+- Removed 'classz' parameter from nvl() on ScarletUtils because it is not necessary.
+
 ## 2019-09-09
 
 ### 0.1.0.4
