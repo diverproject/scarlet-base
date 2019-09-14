@@ -49,6 +49,12 @@
 
 # Logs
 
+## 2019-09-14
+
+### 0.1.1.6
+- Fixed use of nvl() on Bitwise classes, DoubleParser and FloatParser.
+- Updated code format of DoubleParser and FloatParser.
+
 ## 2019-09-13
 
 ### 0.1.0.5

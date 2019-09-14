@@ -97,7 +97,7 @@ public class DoubleParser
 		str = StringUtils.trim(str, "0");
 		int length = str.length();
 
-		return length + ScarletUtils.nvl(Integer.class, this.expoent, 0);
+		return length + ScarletUtils.nvl(this.expoent, 0);
 	}
 
 	public double parseDouble()
@@ -108,10 +108,8 @@ public class DoubleParser
 	public double parseDouble(boolean safe)
 	{
 		if (this.expoent != null)
-		{
 			if (this.expoent < Double.MIN_EXPONENT || this.expoent > Double.MAX_EXPONENT)
 				throw new NumberUtilsRuntimeException(DOUBLE_PARSER_EXPOENT, this.expoent, Double.MIN_EXPONENT, Double.MAX_EXPONENT);
-		}
 
 		if (safe)
 		{

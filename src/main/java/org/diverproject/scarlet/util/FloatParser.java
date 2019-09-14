@@ -18,17 +18,17 @@ public class FloatParser
 
 	public FloatParser()
 	{
-		isExpression = false;
-		positive = false;
-		value = "0";
-		expoent = null;
-		expoentPositive = true;
-		raw = "0";
+		this.isExpression = false;
+		this.positive = false;
+		this.value = "0";
+		this.expoent = null;
+		this.expoentPositive = true;
+		this.raw = "0";
 	}
 
 	public boolean isExpression()
 	{
-		return isExpression;
+		return this.isExpression;
 	}
 
 	public void setExpression(boolean isExpression)
@@ -38,7 +38,7 @@ public class FloatParser
 
 	public boolean isPositive()
 	{
-		return positive;
+		return this.positive;
 	}
 
 	public void setPositive(boolean positive)
@@ -48,12 +48,12 @@ public class FloatParser
 
 	public boolean isNegative()
 	{
-		return !isPositive();
+		return !this.isPositive();
 	}
 
 	public String getValue()
 	{
-		return value;
+		return this.value;
 	}
 
 	public void setValue(String value)
@@ -63,7 +63,7 @@ public class FloatParser
 
 	public Integer getExpoent()
 	{
-		return expoent;
+		return this.expoent;
 	}
 
 	public void setExpoent(Integer expoent)
@@ -73,7 +73,7 @@ public class FloatParser
 
 	public boolean isExpoentPositive()
 	{
-		return expoentPositive;
+		return this.expoentPositive;
 	}
 
 	public void setExpoentPositive(boolean expoentPositive)
@@ -83,7 +83,7 @@ public class FloatParser
 
 	public String getRaw()
 	{
-		return raw;
+		return this.raw;
 	}
 
 	public void setRaw(String raw)
@@ -93,41 +93,39 @@ public class FloatParser
 
 	public int getPrecision()
 	{
-		String str = value.replaceAll("[.,]{1}", "");
+		String str = this.value.replaceAll("[.,]{1}", "");
 		str = StringUtils.trim(str, "0");
 		int length = str.length();
 
-		return length + ScarletUtils.nvl(Integer.class, expoent, 0);
+		return length + ScarletUtils.nvl(this.expoent, 0);
 	}
 
 	public float parseFloat()
 	{
-		return parseFloat(true);
+		return this.parseFloat(true);
 	}
 
 	public float parseFloat(boolean safe)
 	{
-		if (expoent != null)
-		{
-			if (expoent < Float.MIN_EXPONENT || expoent > Float.MAX_EXPONENT)
-				throw new NumberUtilsRuntimeException(FLOAT_PARSER_EXPOENT, expoent, Float.MIN_EXPONENT, Float.MAX_EXPONENT);
-		}
+		if (this.expoent != null)
+			if (this.expoent < Float.MIN_EXPONENT || this.expoent > Float.MAX_EXPONENT)
+				throw new NumberUtilsRuntimeException(FLOAT_PARSER_EXPOENT, this.expoent, Float.MIN_EXPONENT, Float.MAX_EXPONENT);
 
 		if (safe)
 		{
-			int precision = getPrecision();
+			int precision = this.getPrecision();
 
 			if (precision > FLOAT_MAX_PRECISION)
 				throw new NumberUtilsRuntimeException(FLOAT_PARSER_PRECISION, precision, FLOAT_MAX_PRECISION);
 		}
 
-		return Float.parseFloat(raw.replace(",", "."));
+		return Float.parseFloat(this.raw.replace(",", "."));
 	}
 
 	@Override
 	public String toString()
 	{
 		return	String.format("%s[isExpression: %s, positive: %s, expoentPositive: %s, expoent: %s, value: %s, raw: %s]",
-				getClass().getSimpleName(), isExpression, positive, expoentPositive, expoent, value, raw);
+				this.getClass().getSimpleName(), this.isExpression, this.positive, this.expoentPositive, this.expoent, this.value, this.raw);
 	}
 }

@@ -49,7 +49,7 @@ public class Bitwise16
 
 	public void setProperties(String... properties)
 	{
-		this.properties = ScarletUtils.nvl(String[].class, properties, DEFAULT_PROPERTIES);
+		this.properties = ScarletUtils.nvl(properties, DEFAULT_PROPERTIES);
 	}
 
 	public boolean has(short property)
