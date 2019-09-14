@@ -51,6 +51,9 @@
 
 ## 2019-09-14
 
+### 0.1.1.7
+- Update eclipse project settings.
+
 ### 0.1.1.6
 - Fixed use of nvl() on Bitwise classes, DoubleParser and FloatParser.
 - Updated code format of DoubleParser and FloatParser.
