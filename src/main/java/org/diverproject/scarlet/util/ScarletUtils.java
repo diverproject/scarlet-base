@@ -1,5 +1,7 @@
 package org.diverproject.scarlet.util;
 
+import java.util.Collection;
+
 import org.diverproject.scarlet.language.Language;
 
 public class ScarletUtils
@@ -55,5 +57,10 @@ public class ScarletUtils
 
 			throw new NullPointerException(String.format(language.getFormat(), args));
 		}
+	}
+
+	public static int collectionSize(Collection<?> collection)
+	{
+		return collection == null ? 0 : collection.size();
 	}
 }

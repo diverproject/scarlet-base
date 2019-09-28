@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-09-28
+
+### 0.1.1.8
+- Added method to get size of collection or return 0 (zero) when null.
+
 ## 2019-09-14
 
 ### 0.1.1.7
