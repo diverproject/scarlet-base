@@ -51,6 +51,9 @@
 
 ## 2019-10-03
 
+### 0.1.1.11
+- Added hasMinLength() and hasMaxLength() on StringUtils to check string length consider null values as false.
+
 ### 0.1.1.10
 - Updated project java version of 11 to 12.
 

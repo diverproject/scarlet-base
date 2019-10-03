@@ -222,7 +222,6 @@ public class StringUtils
 		if (times < 0) throw new StringUtilsRuntimeException(INDEX_OF_TIMES);
 
 		for (int characterIndex = 0, sequenceOffset = 0, matchCount = 0; characterIndex < str.length(); characterIndex++)
-		{
 			if (str.charAt(characterIndex) == sequence.charAt(sequenceOffset))
 			{
 				if (++sequenceOffset == sequence.length())
@@ -235,7 +234,6 @@ public class StringUtils
 			}
 			else
 				sequenceOffset = 0;
-		}
 
 		return -1;
 	}
@@ -491,12 +489,10 @@ public class StringUtils
 		String parsed = "";
 
 		for (int i = 0; i < splitted.length; i++)
-		{
 			if (i != 0)
 				parsed += StringUtils.capitalize(splitted[i].toLowerCase());
 			else
 				parsed += splitted[i].toLowerCase();
-		}
 
 		return parsed;
 	}
@@ -521,10 +517,8 @@ public class StringUtils
 				)
 			)
 			{
-				underline = (
-					(Character.isDigit(string.charAt(i)) && !Character.isDigit(string.charAt(i - 1))) ||
-					(i < string.length() - 1 && Character.isLowerCase(string.charAt(i + 1)))
-				);
+				underline = Character.isDigit(string.charAt(i)) && !Character.isDigit(string.charAt(i - 1)) ||
+				i < string.length() - 1 && Character.isLowerCase(string.charAt(i + 1));
 
 				if (underline)
 				{
@@ -747,18 +741,24 @@ public class StringUtils
 	public static String getSimpleNameOf(String classname)
 	{
 		return	StringUtils.isEmpty(classname) ?
-					null : (
-						classname.lastIndexOf("$") >= 0 ?
-							classname.substring(classname.lastIndexOf("$") + 1) : (
-								classname.lastIndexOf(".") < 0 ?
-									classname : classname.substring(classname.lastIndexOf(".") + 1)
-							)
-					)
+					null : classname.lastIndexOf("$") >= 0 ?
+						classname.substring(classname.lastIndexOf("$") + 1) : classname.lastIndexOf(".") < 0 ?
+							classname : classname.substring(classname.lastIndexOf(".") + 1)
 				;
+	}
+
+	public static boolean hasMinLength(String string, int minLength)
+	{
+		return string != null && IntegerUtils.hasMin(string.length(), minLength);
+	}
+
+	public static boolean hasMaxLength(String string, int maxLength)
+	{
+		return string != null && IntegerUtils.hasMax(string.length(), maxLength);
 	}
 
 	public static boolean hasBetween(String string, int minLength, int maxLength)
 	{
-		return (string != null) && IntegerUtils.hasBetween(string.length(), minLength, maxLength);
+		return string != null && IntegerUtils.hasBetween(string.length(), minLength, maxLength);
 	}
 }

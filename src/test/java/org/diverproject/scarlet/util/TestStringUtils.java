@@ -548,8 +548,28 @@ public class TestStringUtils
 	}
 
 	@Test
+	@DisplayName("String has min length")
+	public void testHasMinLength()
+	{
+		assertTrue(StringUtils.hasMinLength("abcde", 4));
+		assertTrue(StringUtils.hasMinLength("abcde", 5));
+		assertFalse(StringUtils.hasMinLength("abcde", 6));
+		assertFalse(StringUtils.hasMinLength(null, 6));
+	}
+
+	@Test
+	@DisplayName("String has max length")
+	public void testHasMaxLength()
+	{
+		assertTrue(StringUtils.hasMaxLength("abcde", 6));
+		assertTrue(StringUtils.hasMaxLength("abcde", 5));
+		assertFalse(StringUtils.hasMaxLength("abcde", 4));
+		assertFalse(StringUtils.hasMaxLength(null, 4));
+	}
+
+	@Test
 	@DisplayName("String has length between")
-	public void testHasbetween()
+	public void testHasBetween()
 	{
 		assertTrue(StringUtils.hasBetween("abcde", 5, 5));
 		assertTrue(StringUtils.hasBetween("abcde", 4, 5));
