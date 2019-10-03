@@ -51,6 +51,9 @@
 
 ## 2019-10-03
 
+### 0.1.1.10
+- Updated project java version of 11 to 12.
+
 ### 0.1.1.9
 - Added hasBetween() on StringUtils to check string length consider null values as false.
 
