@@ -7,10 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
 
 @DisplayName("String Utils")
 public class TestStringUtils
@@ -42,12 +43,10 @@ public class TestStringUtils
 		assertTrue(StringUtils.isAlpha(StringUtils.ACCENTS));
 
 		for (char c = 0; c < 255; c++)
-		{
 			if (StringUtils.LETTERS.contains(Character.toString(c)))
 				assertTrue(StringUtils.isAlpha(Character.toString(c)));
 			else
 				assertFalse(StringUtils.isAlpha(Character.toString(c)));
-		}
 	}
 
 	@Test
@@ -546,6 +545,21 @@ public class TestStringUtils
 		assertEquals(StringUtils.getSimpleNameOf(StringClass.class.getSimpleName()), StringClass.class.getSimpleName());
 		assertEquals(StringUtils.getSimpleNameOf(TestStringUtils.class.getName()), TestStringUtils.class.getSimpleName());
 		assertEquals(StringUtils.getSimpleNameOf(TestStringUtils.class.getSimpleName()), TestStringUtils.class.getSimpleName());
+	}
+
+	@Test
+	@DisplayName("String has length between")
+	public void testHasbetween()
+	{
+		assertTrue(StringUtils.hasBetween("abcde", 5, 5));
+		assertTrue(StringUtils.hasBetween("abcde", 4, 5));
+		assertTrue(StringUtils.hasBetween("abcde", 5, 6));
+
+		assertFalse(StringUtils.hasBetween("abcde", 6, 5));
+		assertFalse(StringUtils.hasBetween("abcde", 5, 4));
+		assertFalse(StringUtils.hasBetween("abcde", 4, 4));
+		assertFalse(StringUtils.hasBetween("abcde", 6, 6));
+		assertFalse(StringUtils.hasBetween(null, 5, 5));
 	}
 
 	private class StringClass

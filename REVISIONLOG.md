@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-10-03
+
+### 0.1.1.9
+- Added hasBetween() on StringUtils to check string length consider null values as false.
+
 ## 2019-09-28
 
 ### 0.1.1.8

@@ -756,4 +756,9 @@ public class StringUtils
 					)
 				;
 	}
+
+	public static boolean hasBetween(String string, int minLength, int maxLength)
+	{
+		return (string != null) && IntegerUtils.hasBetween(string.length(), minLength, maxLength);
+	}
 }
