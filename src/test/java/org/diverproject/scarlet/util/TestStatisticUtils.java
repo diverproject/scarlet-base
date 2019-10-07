@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class TestStatisticUtils
 {
 	@Test
-	@DisplayName("")
+	@DisplayName("Percentage")
 	public void testPercentage()
 	{
 		assertEquals(StatisticUtils.percentage(100, 100), 100);

@@ -51,6 +51,9 @@
 
 ## 2019-10-07
 
+### 0.1.2.13
+- Fixed DisplayName annotation name of testPercentage() on TestStatisticUtils.
+
 ### 0.1.1.12
 - Change project settings of Eclipse to IntelliJ.
 
