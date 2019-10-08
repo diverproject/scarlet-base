@@ -51,6 +51,9 @@
 
 ## 2019-10-08
 
+### 0.1.3.16
+- Fixed maven 'organization.name' setting.
+
 ### 0.1.2.15
 - Updated maven build using java.version and project.build.sourceEncoding.
 
