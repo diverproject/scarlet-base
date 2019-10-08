@@ -23,6 +23,7 @@
 	</issueManagement>
 
 	<properties>
+		<java.version>10</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.jupiter.versions>5.4.0</junit.jupiter.versions>
 		<junit.platform.versions>1.4.1</junit.platform.versions>
@@ -75,9 +76,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven.build.version}</version>
 				<configuration>
-					<source>13</source>
-					<target>13</target>
-					<encoding>UTF-8</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

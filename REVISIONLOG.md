@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-10-08
+
+### 0.1.2.15
+- Updated maven build using java.version and project.build.sourceEncoding.
+
 ## 2019-10-07
 
 ### 0.1.2.14
