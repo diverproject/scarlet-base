@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>Scarlet Base Library</name>
-	<description>A base library with utilities for any project and without depencies</description>
+	<description>A base library with utilities for any project and without dependencies</description>
 	<url>http://scarlet.diverproject.org/base</url>
 
 	<organization>

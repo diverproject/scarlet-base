@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-10-09
+
+### 0.1.4.17
+- Fixed maven pom settings on 'description'.
+
 ## 2019-10-08
 
 ### 0.1.3.16
