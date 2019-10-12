@@ -1,17 +1,11 @@
 package org.diverproject.scarlet.util;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("String Utils")
 public class TestStringUtils
@@ -580,6 +574,62 @@ public class TestStringUtils
 		assertFalse(StringUtils.hasBetween("abcde", 4, 4));
 		assertFalse(StringUtils.hasBetween("abcde", 6, 6));
 		assertFalse(StringUtils.hasBetween(null, 5, 5));
+	}
+
+	@Test
+	@DisplayName("Qualified name")
+	public void testQualifiedName()
+	{
+		assertEquals("org", StringUtils.qualifiedName("org"));
+		assertEquals("o.diverproject", StringUtils.qualifiedName("org.diverproject"));
+		assertEquals("o.d.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet"));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet"));
+
+		assertEquals("o", StringUtils.qualifiedName("org", 2));
+		assertEquals("org", StringUtils.qualifiedName("org", 3));
+		assertEquals("org", StringUtils.qualifiedName("org", 4));
+		assertEquals("o.d", StringUtils.qualifiedName("org.diverproject", 13));
+		assertEquals("o.diverproject", StringUtils.qualifiedName("org.diverproject", 14));
+		assertEquals("o.diverproject", StringUtils.qualifiedName("org.diverproject", 15));
+		assertEquals("o.d.S", StringUtils.qualifiedName("org.diverproject.Scarlet", 10));
+		assertEquals("o.d.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet", 11));
+		assertEquals("o.d.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet", 12));
+		assertEquals("o.d.u.S", StringUtils.qualifiedName("org.diverproject.utils.Scarlet", 12));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet", 13));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet", 14));
+
+		assertEquals("org", StringUtils.qualifiedName("org",3, false));
+		assertEquals("o.diverproject", StringUtils.qualifiedName("org.diverproject",15, false));
+		assertEquals("org.diverproject", StringUtils.qualifiedName("org.diverproject",16, false));
+		assertEquals("org.diverproject", StringUtils.qualifiedName("org.diverproject",17, false));
+		assertEquals("o.d.S", StringUtils.qualifiedName("org.diverproject.Scarlet",10, false));
+		assertEquals("o.d.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet",11, false));
+		assertEquals("o.d.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet",12, false));
+		assertEquals("o.diverproject.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet",23, false));
+		assertEquals("org.diverproject.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet",24, false));
+		assertEquals("org.diverproject.Scarlet", StringUtils.qualifiedName("org.diverproject.Scarlet",25, false));
+		assertEquals("o.d.u.S", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",11, false));
+		assertEquals("o.d.u.S", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",12, false));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",13, false));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",16, false));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",17, false));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",18, false));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",27, false));
+		assertEquals("o.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",28, false));
+		assertEquals("o.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",29, false));
+		assertEquals("org.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",30, false));
+
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",30, false, 1));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",30, false, 2));
+		assertEquals("o.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",30, false, 3));
+		assertEquals("org.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",30, false, 4));
+		assertEquals("o.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",29, false, 4));
+		assertEquals("o.diverproject.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",28, false, 4));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",27, false, 4));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",18, false, 4));
+		assertEquals("o.d.utils.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",17, false, 4));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",16, false, 4));
+		assertEquals("o.d.u.Scarlet", StringUtils.qualifiedName("org.diverproject.utils.Scarlet",13, false, 4));
 	}
 
 	private class StringClass

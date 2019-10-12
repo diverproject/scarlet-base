@@ -49,6 +49,11 @@
 
 # Logs
 
+## 2019-10-12
+
+### 0.1.4.18
+- Added qualifiedName() to simplify a full class name considering.
+
 ## 2019-10-09
 
 ### 0.1.4.17

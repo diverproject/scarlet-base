@@ -1,30 +1,6 @@
 package org.diverproject.scarlet.util;
 
-import static org.diverproject.scarlet.util.ScarletUtils.nameOf;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.BACKSPACE_OUT_OF_BOUNDS;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.CAP_LENGTH;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.CAP_MOD_LENGTH;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.CAP_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INDENT_LENGTH;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INDEX_OF_SEQUENCE_EMPTY;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INDEX_OF_SEQUENCE_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INDEX_OF_STRING;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INDEX_OF_TIMES;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.INSERT_OUT_OF_BOUNDS;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PAD_PATTERN_COUNT;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PAD_PATTERN_EMPTY;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PAD_PATTERN_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PAD_STRING_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PAD_TYPE;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PARSE_EMPTY_EMPTY;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.PARSE_EMPTY_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.SPLIT_LENGTH_LENGTH;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.SPLIT_LENGTH_NULL_STIRNG;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_SEQUENCE_EMPTY;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_SEQUENCE_NULL;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.TRIM_STRING;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.VAR_LOWER_CASE;
-import static org.diverproject.scarlet.util.language.StringUtilsLanguage.VAR_UPPER_CASE;
+import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
 
 import java.text.Normalizer;
 import java.util.Arrays;
@@ -32,7 +8,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.diverproject.scarlet.util.exceptions.StringUtilsRuntimeException;
+import static org.diverproject.scarlet.util.ScarletUtils.nameOf;
+import static org.diverproject.scarlet.util.language.StringUtilsLanguage.*;
 
 public class StringUtils
 {
@@ -760,5 +737,49 @@ public class StringUtils
 	public static boolean hasBetween(String string, int minLength, int maxLength)
 	{
 		return string != null && IntegerUtils.hasBetween(string.length(), minLength, maxLength);
+	}
+
+	public static String qualifiedName(String packageClassName)
+	{
+		return qualifiedName(packageClassName, 999, true);
+	}
+
+	public static String qualifiedName(String packageClassName, int maxLength)
+	{
+		return qualifiedName(packageClassName, maxLength, true);
+	}
+
+	public static String qualifiedName(String packageClassName, int maxLength, boolean reduceAll)
+	{
+		return qualifiedName(packageClassName, maxLength, reduceAll, 999);
+	}
+
+	public static String qualifiedName(String packageClassName, int maxLength, boolean reduceAll, int reducePathAt)
+	{
+		String[] names = packageClassName.split("\\.");
+		StringBuilder qualifiedName = new StringBuilder();
+		int qualifiedIndex = -1;
+
+		for (int i = names.length - 1, length = (names.length * 2) - 1; i >= 0; i--)
+		{
+			if ((length += names[i].length() - 1) > maxLength)
+			{
+				qualifiedIndex = i;
+				break;
+			}
+		}
+
+		for (int i = names.length - 1, j = 1; i >= 0; i--, j++)
+		{
+			if (j > reducePathAt || i <= qualifiedIndex || (reduceAll && i != names.length - 1))
+				qualifiedName.insert(0, names[i].substring(0, 1));
+			else
+				qualifiedName.insert(0, names[i]);
+
+			if (i > 0)
+				qualifiedName.insert(0, ".");
+		}
+
+		return qualifiedName.length() > maxLength ? qualifiedName.substring(0, maxLength) : qualifiedName.toString();
 	}
 }
