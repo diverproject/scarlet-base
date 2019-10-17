@@ -22,10 +22,10 @@ public class TestArrayUtils
 	{
 		String[] items = new String[] { "a", "b", "c", "d", "e" };
 
-		assertEquals(ArrayUtils.join(String.class, items), "a, b, c, d, e");
-		assertEquals(ArrayUtils.join(String.class, ";", items), "a;b;c;d;e");
-		assertEquals(ArrayUtils.join(String.class, Arrays.asList(items).iterator()), "a, b, c, d, e");
-		assertEquals(ArrayUtils.join(String.class, Arrays.asList(items).iterator(), ";"), "a;b;c;d;e");
+		assertEquals(ArrayUtils.join(items), "a, b, c, d, e");
+		assertEquals(ArrayUtils.join(";", items), "a;b;c;d;e");
+		assertEquals(ArrayUtils.join(Arrays.asList(items).iterator()), "a, b, c, d, e");
+		assertEquals(ArrayUtils.join(Arrays.asList(items).iterator(), ";"), "a;b;c;d;e");
 	}
 
 	@Test
@@ -34,12 +34,12 @@ public class TestArrayUtils
 	{
 		String[] items = new String[] { "a", "b", "c", "d", "e" };
 
-		assertTrue(ArrayUtils.in(String.class, "a", items));
-		assertTrue(ArrayUtils.in(String.class, "b", items));
-		assertTrue(ArrayUtils.in(String.class, "c", items));
-		assertTrue(ArrayUtils.in(String.class, "d", items));
-		assertTrue(ArrayUtils.in(String.class, "e", items));
-		assertFalse(ArrayUtils.in(String.class, "f", items));
+		assertTrue(ArrayUtils.in("a", items));
+		assertTrue(ArrayUtils.in("b", items));
+		assertTrue(ArrayUtils.in("c", items));
+		assertTrue(ArrayUtils.in("d", items));
+		assertTrue(ArrayUtils.in("e", items));
+		assertFalse(ArrayUtils.in("f", items));
 	}
 
 	@Test
@@ -48,10 +48,10 @@ public class TestArrayUtils
 	{
 		String[] items = new String[] { "a", "b" };
 
-		assertFalse(ArrayUtils.hasArrayIndex(String.class, items, -1));
-		assertTrue(ArrayUtils.hasArrayIndex(String.class, items, 0));
-		assertTrue(ArrayUtils.hasArrayIndex(String.class, items, 1));
-		assertFalse(ArrayUtils.hasArrayIndex(String.class, items, 2));
+		assertFalse(ArrayUtils.hasArrayIndex(items, -1));
+		assertTrue(ArrayUtils.hasArrayIndex(items, 0));
+		assertTrue(ArrayUtils.hasArrayIndex(items, 1));
+		assertFalse(ArrayUtils.hasArrayIndex(items, 2));
 	}
 
 	@Test
@@ -60,13 +60,13 @@ public class TestArrayUtils
 	{
 		String[] array = new String[] { "a", "b", "c", "d", "e" };
 
-		assertArrayEquals(ArrayUtils.subArray(String.class, array, 0, 1), new String[] { "a" });
-		assertArrayEquals(ArrayUtils.subArray(String.class, array, 0, 3), new String[] { "a", "b", "c" });
-		assertArrayEquals(ArrayUtils.subArray(String.class, array, 2, 1), new String[] { "c" });
-		assertArrayEquals(ArrayUtils.subArray(String.class, array, 2, 3), new String[] { "c", "d", "e" });
+		assertArrayEquals(ArrayUtils.subArray(array, 0, 1), new String[] { "a" });
+		assertArrayEquals(ArrayUtils.subArray(array, 0, 3), new String[] { "a", "b", "c" });
+		assertArrayEquals(ArrayUtils.subArray(array, 2, 1), new String[] { "c" });
+		assertArrayEquals(ArrayUtils.subArray(array, 2, 3), new String[] { "c", "d", "e" });
 
-		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(String.class, array, -1, 1); });
-		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(String.class, array, 0, 0); });
+		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(array, -1, 1); });
+		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(array, 0, 0); });
 	}
 
 	@Test

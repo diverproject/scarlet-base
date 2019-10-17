@@ -1,37 +1,36 @@
 package org.diverproject.scarlet.util;
 
-import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_CLAZZ_NULL;
-import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_LENGTH_INVALID;
-import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_NULL;
-import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_OFFSET_INVALID;
-
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Iterator;
 
 import org.diverproject.scarlet.util.exceptions.ArrayUtilsRuntimeException;
+
+import static org.diverproject.scarlet.util.ScarletUtils.nameOf;
+import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.*;
 
 public class ArrayUtils
 {
 	public static final int MIN_SUB_ARRAY_LENGTH = 1;
 	public static final String DEFAULT_JOIN_SEPARATOR = ", ";
 
-	public static <T> String join(Class<T> classz, @SuppressWarnings("unchecked") T... elements)
+	public static <T> String join(T... elements)
 	{
-		return ArrayUtils.join(classz, Arrays.asList(elements).iterator());
+		return ArrayUtils.join(Arrays.asList(elements).iterator());
 	}
 
-	public static <T> String join(Class<T> classz, String separator, @SuppressWarnings("unchecked") T... elements)
+	public static <T> String join(String separator, T... elements)
 	{
-		return ArrayUtils.join(classz, Arrays.asList(elements).iterator(), separator);
+		return ArrayUtils.join( Arrays.asList(elements).iterator(), separator);
 	}
 
-	public static <T> String join(Class<T> classz, Iterator<T> iterator)
+	public static <T> String join(Iterator<T> iterator)
 	{
-		return ArrayUtils.join(classz, iterator, DEFAULT_JOIN_SEPARATOR);
+		return ArrayUtils.join(iterator, DEFAULT_JOIN_SEPARATOR);
 	}
 
-	public static <T> String join(Class<T> classz, Iterator<T> iterator, String separator)
+	public static <T> String join(Iterator<T> iterator, String separator)
 	{
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -60,7 +59,7 @@ public class ArrayUtils
 		return false;
 	}
 
-	public static <T> boolean in(Class<T> clazz, T item, @SuppressWarnings("unchecked") T... items)
+	public static <T> boolean in(T item, T... items)
 	{
 		for (T item2 : items)
 			if (item == null && item2 == null || item != null && item.equals(item2))
@@ -69,7 +68,7 @@ public class ArrayUtils
 		return false;
 	}
 
-	public static <T> boolean hasArrayIndex(Class<T> clazz, T[] array, int index)
+	public static <T> boolean hasArrayIndex(T[] array, int index)
 	{
 		return index >= 0 && index < array.length;
 	}
@@ -155,24 +154,21 @@ public class ArrayUtils
 		return length;
 	}
 
-	public static <T> T[] subArray(Class<T> clazz, T[] array, int offset, int length)
+	public static <T> T[] subArray(T[] array, int offset, int length)
 	{
-		if (clazz == null)
-			throw new ArrayUtilsRuntimeException(SUB_ARRAY_CLAZZ_NULL);
-
 		if (array == null)
 			throw new ArrayUtilsRuntimeException(SUB_ARRAY_NULL);
 
-		if (!hasArrayIndex(clazz, array, offset))
+		if (!hasArrayIndex(array, offset))
 			throw new ArrayUtilsRuntimeException(SUB_ARRAY_OFFSET_INVALID);
 
 		length = validateSubArray(offset, length, array.length);
 
 		@SuppressWarnings("unchecked")
-		T[] sub = (T[]) Array.newInstance(clazz, length);
+		T[] sub = (T[]) Array.newInstance(array.getClass().getComponentType(), length);
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		if (length >= 0)
+			System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -189,8 +185,7 @@ public class ArrayUtils
 
 		char[] sub = new char[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -207,8 +202,7 @@ public class ArrayUtils
 
 		byte[] sub = new byte[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -225,8 +219,7 @@ public class ArrayUtils
 
 		short[] sub = new short[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -243,8 +236,7 @@ public class ArrayUtils
 
 		int[] sub = new int[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -261,8 +253,7 @@ public class ArrayUtils
 
 		long[] sub = new long[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -279,8 +270,7 @@ public class ArrayUtils
 
 		float[] sub = new float[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}
@@ -297,8 +287,7 @@ public class ArrayUtils
 
 		double[] sub = new double[length];
 
-		for (int i = 0; i < length; i++)
-			sub[i] = array[offset + i];
+		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
 	}

@@ -49,6 +49,12 @@
 
 # Logs
 
+## 2019-10-16
+
+### 0.1.4.19
+- Updated methods of ArrayUtils to simplify generic type without generic class specification.
+- Updated subArray methods of ArrayUtils with improve logic and System.arraycopy() use.
+
 ## 2019-10-12
 
 ### 0.1.4.18

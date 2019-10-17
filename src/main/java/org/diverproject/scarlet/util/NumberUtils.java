@@ -127,9 +127,9 @@ public class NumberUtils
 		if (minValue > maxValue)
 			throw new NumberUtilsRuntimeException(HAS_INTEGER_LENGTH_MINMAX, minValue, maxValue);
 
-		return	ArrayUtils.in(Integer.class, compareStringNumber(str, Long.toString(minValue)),
+		return	ArrayUtils.in(compareStringNumber(str, Long.toString(minValue)),
 					COMPARE_EQUALS, COMPARE_MAJOR
-				) && ArrayUtils.in(Integer.class, compareStringNumber(str, Long.toString(maxValue)),
+				) && ArrayUtils.in(compareStringNumber(str, Long.toString(maxValue)),
 					COMPARE_EQUALS, COMPARE_MINOR
 				);
 	}
