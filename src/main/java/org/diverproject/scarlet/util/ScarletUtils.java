@@ -1,8 +1,8 @@
 package org.diverproject.scarlet.util;
 
-import java.util.Collection;
-
 import org.diverproject.scarlet.language.Language;
+
+import java.util.Collection;
 
 public class ScarletUtils
 {
@@ -62,5 +62,14 @@ public class ScarletUtils
 	public static int collectionSize(Collection<?> collection)
 	{
 		return collection == null ? 0 : collection.size();
+	}
+
+	public static void sleep(int milliseconds)
+	{
+		try	{
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
