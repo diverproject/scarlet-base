@@ -1,14 +1,14 @@
 package org.diverproject.scarlet.util;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Iterator;
+import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_LENGTH_INVALID;
+import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_NULL;
+import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.SUB_ARRAY_OFFSET_INVALID;
 
 import org.diverproject.scarlet.util.exceptions.ArrayUtilsRuntimeException;
 
-import static org.diverproject.scarlet.util.ScarletUtils.nameOf;
-import static org.diverproject.scarlet.util.language.ArrayUtilsLanguage.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayUtils
 {
@@ -290,5 +290,141 @@ public class ArrayUtils
 		System.arraycopy(array, offset, sub, 0, length);
 
 		return sub;
+	}
+
+	public static <D>  D[] reallocate(D[] array, int length)
+	{
+		@SuppressWarnings("unchecked")
+		D[] newArray = (D[]) Array.newInstance(array.getClass().getComponentType(), length);
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static byte[] reallocate(byte[] array, int length)
+	{
+		byte[] newArray = new byte[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static short[] reallocate(short[] array, int length)
+	{
+		short[] newArray = new short[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static int[] reallocate(int[] array, int length)
+	{
+		int[] newArray = new int[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static long[] reallocate(long[] array, int length)
+	{
+		long[] newArray = new long[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static float[] reallocate(float[] array, int length)
+	{
+		float[] newArray = new float[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static double[] reallocate(double[] array, int length)
+	{
+		double[] newArray = new double[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static char[] reallocate(char[] array, int length)
+	{
+		char[] newArray = new char[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static boolean[] reallocate(boolean[] array, int length)
+	{
+		boolean[] newArray = new boolean[length];
+		copy(array, newArray);
+
+		return newArray;
+	}
+
+	public static <T> boolean contains(T[] items, T value)
+	{
+		for (T item : items)
+			if (item.equals(value))
+				return true;
+
+		return false;
+	}
+
+	public static <D> void copy(D[] source, D[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(byte[] source, byte[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(short[] source, short[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(int[] source, int[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(long[] source, long[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(float[] source, float[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(double[] source, double[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(boolean[] source, boolean[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(char[] source, char[] destination)
+	{
+		for (int i = 0; i < source.length && i < destination.length; i++)
+			destination[i] = source[i];
 	}
 }

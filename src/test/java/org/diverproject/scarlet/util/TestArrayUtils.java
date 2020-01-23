@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-
-import org.diverproject.scarlet.util.ArrayUtils;
 import org.diverproject.scarlet.util.exceptions.ArrayUtilsRuntimeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 @DisplayName("Array Utils")
 public class TestArrayUtils
@@ -172,5 +171,214 @@ public class TestArrayUtils
 
 		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(array, -1, 1); });
 		assertThrows(ArrayUtilsRuntimeException.class, () -> { ArrayUtils.subArray(array, 0, 0); });
+	}
+
+	@Test
+	@DisplayName("Reallocate data")
+	public void testReallocate()
+	{
+		assertArrayEquals(array("0"), ArrayUtils.reallocate(array("0", "1", "2", "3"), 1));
+		assertArrayEquals(array("0", "1"), ArrayUtils.reallocate(array("0", "1", "2", "3"), 2));
+		assertArrayEquals(array("0", "1", "2"), ArrayUtils.reallocate(array("0", "1", "2", "3"), 3));
+		assertArrayEquals(array("0", "1", "2", "3"), ArrayUtils.reallocate(array("0", "1", "2", "3"), 4));
+		assertArrayEquals(array("0"), ArrayUtils.reallocate(array("0", "1"), 1));
+		assertArrayEquals(array("0", "1"), ArrayUtils.reallocate(array("0", "1"), 2));
+		assertArrayEquals(array("0", "1", null), ArrayUtils.reallocate(array("0", "1"), 3));
+		assertArrayEquals(array("0", "1", null, null), ArrayUtils.reallocate(array("0", "1"), 4));
+
+		byte byte0 = 0;
+		byte byte1 = 1;
+		byte byte2 = 2;
+		byte byte3 = 3;
+
+		assertArrayEquals(bytes(byte0), ArrayUtils.reallocate(bytes(byte0, byte1, byte2, byte3), 1));
+		assertArrayEquals(bytes(byte0, byte1), ArrayUtils.reallocate(bytes(byte0, byte1, byte2, byte3), 2));
+		assertArrayEquals(bytes(byte0, byte1, byte2), ArrayUtils.reallocate(bytes(byte0, byte1, byte2, byte3), 3));
+		assertArrayEquals(bytes(byte0, byte1, byte2, byte3), ArrayUtils.reallocate(bytes(byte0, byte1, byte2, byte3), 4));
+		assertArrayEquals(bytes(byte0), ArrayUtils.reallocate(bytes(byte0, byte1), 1));
+		assertArrayEquals(bytes(byte0, byte1), ArrayUtils.reallocate(bytes(byte0, byte1), 2));
+		assertArrayEquals(bytes(byte0, byte1, byte0), ArrayUtils.reallocate(bytes(byte0, byte1), 3));
+
+		short short0 = 0;
+		short short1 = 1;
+		short short2 = 2;
+		short short3 = 3;
+
+		assertArrayEquals(shorts(short0), ArrayUtils.reallocate(shorts(short0, short1, short2, short3), 1));
+		assertArrayEquals(shorts(short0, short1), ArrayUtils.reallocate(shorts(short0, short1, short2, short3), 2));
+		assertArrayEquals(shorts(short0, short1, short2), ArrayUtils.reallocate(shorts(short0, short1, short2, short3), 3));
+		assertArrayEquals(shorts(short0, short1, short2, short3), ArrayUtils.reallocate(shorts(short0, short1, short2, short3), 4));
+		assertArrayEquals(shorts(short0), ArrayUtils.reallocate(shorts(short0, short1), 1));
+		assertArrayEquals(shorts(short0, short1), ArrayUtils.reallocate(shorts(short0, short1), 2));
+		assertArrayEquals(shorts(short0, short1, short0), ArrayUtils.reallocate(shorts(short0, short1), 3));
+
+		int int0 = 0;
+		int int1 = 1;
+		int int2 = 2;
+		int int3 = 3;
+
+		assertArrayEquals(ints(int0), ArrayUtils.reallocate(ints(int0, int1, int2, int3), 1));
+		assertArrayEquals(ints(int0, int1), ArrayUtils.reallocate(ints(int0, int1, int2, int3), 2));
+		assertArrayEquals(ints(int0, int1, int2), ArrayUtils.reallocate(ints(int0, int1, int2, int3), 3));
+		assertArrayEquals(ints(int0, int1, int2, int3), ArrayUtils.reallocate(ints(int0, int1, int2, int3), 4));
+		assertArrayEquals(ints(int0), ArrayUtils.reallocate(ints(int0, int1), 1));
+		assertArrayEquals(ints(int0, int1), ArrayUtils.reallocate(ints(int0, int1), 2));
+		assertArrayEquals(ints(int0, int1, int0), ArrayUtils.reallocate(ints(int0, int1), 3));
+
+		long long0 = 0L;
+		long long1 = 1L;
+		long long2 = 2L;
+		long long3 = 3L;
+
+		assertArrayEquals(longs(long0), ArrayUtils.reallocate(longs(long0, long1, long2, long3), 1));
+		assertArrayEquals(longs(long0, long1), ArrayUtils.reallocate(longs(long0, long1, long2, long3), 2));
+		assertArrayEquals(longs(long0, long1, long2), ArrayUtils.reallocate(longs(long0, long1, long2, long3), 3));
+		assertArrayEquals(longs(long0, long1, long2, long3), ArrayUtils.reallocate(longs(long0, long1, long2, long3), 4));
+		assertArrayEquals(longs(long0), ArrayUtils.reallocate(longs(long0, long1), 1));
+		assertArrayEquals(longs(long0, long1), ArrayUtils.reallocate(longs(long0, long1), 2));
+		assertArrayEquals(longs(long0, long1, long0), ArrayUtils.reallocate(longs(long0, long1), 3));
+
+		float float0 = 0F;
+		float float1 = 1F;
+		float float2 = 2F;
+		float float3 = 3F;
+
+		assertArrayEquals(floats(float0), ArrayUtils.reallocate(floats(float0, float1, float2, float3), 1));
+		assertArrayEquals(floats(float0, float1), ArrayUtils.reallocate(floats(float0, float1, float2, float3), 2));
+		assertArrayEquals(floats(float0, float1, float2), ArrayUtils.reallocate(floats(float0, float1, float2, float3), 3));
+		assertArrayEquals(floats(float0, float1, float2, float3), ArrayUtils.reallocate(floats(float0, float1, float2, float3), 4));
+		assertArrayEquals(floats(float0), ArrayUtils.reallocate(floats(float0, float1), 1));
+		assertArrayEquals(floats(float0, float1), ArrayUtils.reallocate(floats(float0, float1), 2));
+		assertArrayEquals(floats(float0, float1, float0), ArrayUtils.reallocate(floats(float0, float1), 3));
+
+		double double0 = 0D;
+		double double1 = 1D;
+		double double2 = 2D;
+		double double3 = 3D;
+
+		assertArrayEquals(doubles(double0), ArrayUtils.reallocate(doubles(double0, double1, double2, double3), 1));
+		assertArrayEquals(doubles(double0, double1), ArrayUtils.reallocate(doubles(double0, double1, double2, double3), 2));
+		assertArrayEquals(doubles(double0, double1, double2), ArrayUtils.reallocate(doubles(double0, double1, double2, double3), 3));
+		assertArrayEquals(doubles(double0, double1, double2, double3), ArrayUtils.reallocate(doubles(double0, double1, double2, double3), 4));
+		assertArrayEquals(doubles(double0), ArrayUtils.reallocate(doubles(double0, double1), 1));
+		assertArrayEquals(doubles(double0, double1), ArrayUtils.reallocate(doubles(double0, double1), 2));
+		assertArrayEquals(doubles(double0, double1, double0), ArrayUtils.reallocate(doubles(double0, double1), 3));
+
+		char char0 = 0;
+		char char1 = 1;
+		char char2 = 2;
+		char char3 = 3;
+
+		assertArrayEquals(chars(char0), ArrayUtils.reallocate(chars(char0, char1, char2, char3), 1));
+		assertArrayEquals(chars(char0, char1), ArrayUtils.reallocate(chars(char0, char1, char2, char3), 2));
+		assertArrayEquals(chars(char0, char1, char2), ArrayUtils.reallocate(chars(char0, char1, char2, char3), 3));
+		assertArrayEquals(chars(char0, char1, char2, char3), ArrayUtils.reallocate(chars(char0, char1, char2, char3), 4));
+		assertArrayEquals(chars(char0), ArrayUtils.reallocate(chars(char0, char1), 1));
+		assertArrayEquals(chars(char0, char1), ArrayUtils.reallocate(chars(char0, char1), 2));
+		assertArrayEquals(chars(char0, char1, char0), ArrayUtils.reallocate(chars(char0, char1), 3));
+
+		assertArrayEquals(booleans(false), ArrayUtils.reallocate(booleans(false, true, false, true), 1));
+		assertArrayEquals(booleans(false, true), ArrayUtils.reallocate(booleans(false, true, false, true), 2));
+		assertArrayEquals(booleans(false, true, false), ArrayUtils.reallocate(booleans(false, true, false, true), 3));
+		assertArrayEquals(booleans(false, true, false, true), ArrayUtils.reallocate(booleans(false, true, false, true), 4));
+		assertArrayEquals(booleans(false), ArrayUtils.reallocate(booleans(false, true), 1));
+		assertArrayEquals(booleans(false, true), ArrayUtils.reallocate(booleans(false, true), 2));
+		assertArrayEquals(booleans(false, true, false), ArrayUtils.reallocate(booleans(false, true), 3));
+	}
+
+	@Test
+	@DisplayName("Copy")
+	public void testCopy()
+	{
+		String[] stringSource = new String[] { "ABC", "DEF", "GHI", "JKL", "MNO" };
+		String[] stringDestination = new String[stringSource.length];
+		ArrayUtils.copy(stringSource, stringDestination);
+		assertArrayEquals(stringSource, stringDestination);
+
+		byte[] bytesSource = new byte[] { 0, 1, 2, 3, 4 };
+		byte[] bytesDestination = new byte[bytesSource.length];
+		ArrayUtils.copy(bytesSource, bytesDestination);
+		assertArrayEquals(bytesSource, bytesDestination);
+
+		short[] shortSource = new short[] { 0, 1, 2, 3, 4 };
+		short[] shortDestination = new short[shortSource.length];
+		ArrayUtils.copy(shortSource, shortDestination);
+		assertArrayEquals(shortSource, shortDestination);
+
+		int[] intSource = new int[] { 0, 1, 2, 3, 4 };
+		int[] intDestination = new int[intSource.length];
+		ArrayUtils.copy(intSource, intDestination);
+		assertArrayEquals(intSource, intDestination);
+
+		long[] longSource = new long[] { 0L, 1L, 2L, 3L, 4L };
+		long[] longDestination = new long[longSource.length];
+		ArrayUtils.copy(longSource, longDestination);
+		assertArrayEquals(longSource, longDestination);
+
+		float[] floatSource = new float[] { 0F, 1F, 2F, 3F, 4F };
+		float[] floatDestination = new float[floatSource.length];
+		ArrayUtils.copy(floatSource, floatDestination);
+		assertArrayEquals(floatSource, floatDestination);
+
+		double[] doubleSource = new double[] { 0D, 1D, 2D, 3D, 4D };
+		double[] doubleDestination = new double[doubleSource.length];
+		ArrayUtils.copy(doubleSource, doubleDestination);
+		assertArrayEquals(doubleSource, doubleDestination);
+
+		char[] charSource = new char[] { 0, 1, 2, 3, 4 };
+		char[] charDestination = new char[charSource.length];
+		ArrayUtils.copy(charSource, charDestination);
+		assertArrayEquals(charSource, charDestination);
+
+		boolean[] booleanSource = new boolean[] { true, false, true, false, true };
+		boolean[] booleanDestination = new boolean[booleanSource.length];
+		ArrayUtils.copy(booleanSource, booleanDestination);
+		assertArrayEquals(booleanSource, booleanDestination);
+	}
+
+	@SafeVarargs
+	private <D> D[] array(D... values)
+	{
+		return values;
+	}
+
+	private byte[] bytes(byte... values)
+	{
+		return values;
+	}
+
+	private short[] shorts(short... values)
+	{
+		return values;
+	}
+
+	private int[] ints(int... values)
+	{
+		return values;
+	}
+
+	private long[] longs(long... values)
+	{
+		return values;
+	}
+
+	private float[] floats(float... values)
+	{
+		return values;
+	}
+
+	private double[] doubles(double... values)
+	{
+		return values;
+	}
+
+	private char[] chars(char... values)
+	{
+		return values;
+	}
+
+	private boolean[] booleans(boolean... values)
+	{
+		return values;
 	}
 }
