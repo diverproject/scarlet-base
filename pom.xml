@@ -5,7 +5,7 @@
 
 	<groupId>org.diverproject</groupId>
 	<artifactId>scarlet-base</artifactId>
-	<version>0.1.0-ALPHA</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>Scarlet Base Library</name>
@@ -70,6 +70,13 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
