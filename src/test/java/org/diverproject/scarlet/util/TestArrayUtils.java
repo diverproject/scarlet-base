@@ -292,48 +292,241 @@ public class TestArrayUtils
 	{
 		String[] stringSource = new String[] { "ABC", "DEF", "GHI", "JKL", "MNO" };
 		String[] stringDestination = new String[stringSource.length];
-		ArrayUtils.copy(stringSource, stringDestination);
-		assertArrayEquals(stringSource, stringDestination);
+		{
+			ArrayUtils.copy(stringSource, stringDestination);
+			assertArrayEquals(stringSource, stringDestination);
 
-		byte[] bytesSource = new byte[] { 0, 1, 2, 3, 4 };
-		byte[] bytesDestination = new byte[bytesSource.length];
-		ArrayUtils.copy(bytesSource, bytesDestination);
-		assertArrayEquals(bytesSource, bytesDestination);
+			assertThrows(IndexOutOfBoundsException.class, () -> { ArrayUtils.copy(stringSource, new String[stringSource.length], -1); });
+
+			ArrayUtils.copy(stringSource, stringDestination, 0);
+			assertArrayEquals(stringSource, stringDestination);
+
+			ArrayUtils.copy(stringSource, (stringDestination = new String[stringSource.length]), 1);
+			assertArrayEquals(array(null, "DEF", "GHI", "JKL", "MNO"), stringDestination);
+
+			ArrayUtils.copy(stringSource, (stringDestination = new String[stringSource.length]), 1, 3);
+			assertArrayEquals(array(null, "DEF", "GHI", "JKL", null), stringDestination);
+
+			ArrayUtils.copy(stringSource, (stringDestination = new String[stringSource.length]), 1, 4);
+			assertArrayEquals(array(null, "DEF", "GHI", "JKL", "MNO"), stringDestination);
+
+			ArrayUtils.copy(stringSource, (stringDestination = new String[stringSource.length]), 1, 5);
+			assertArrayEquals(array(null, "DEF", "GHI", "JKL", "MNO"), stringDestination);
+
+			ArrayUtils.copy(stringSource, (stringDestination = new String[stringSource.length + 1]), 1, 5);
+			assertArrayEquals(array(null, "DEF", "GHI", "JKL", "MNO", null), stringDestination);
+		}
+
+		byte[] byteSource = new byte[] { 0, 1, 2, 3, 4 };
+		byte[] byteDestination = new byte[byteSource.length];
+		{
+			byte zero = 0;
+			byte one = 1;
+			byte two = 2;
+			byte three = 3;
+			byte four = 4;
+
+			ArrayUtils.copy(byteSource, byteDestination);
+			assertArrayEquals(byteSource, byteDestination);
+
+			assertThrows(IndexOutOfBoundsException.class, () -> { ArrayUtils.copy(byteSource, new byte[byteSource.length], -1); });
+
+			ArrayUtils.copy(byteSource, byteDestination, 0);
+			assertArrayEquals(byteSource, byteDestination);
+
+			ArrayUtils.copy(byteSource, (byteDestination = new byte[byteSource.length]), 1);
+			assertArrayEquals(bytes(zero, one, two, three, four), byteDestination);
+
+			ArrayUtils.copy(byteSource, (byteDestination = new byte[byteSource.length]), 1, 3);
+			assertArrayEquals(bytes(zero, one, two, three, zero), byteDestination);
+
+			ArrayUtils.copy(byteSource, (byteDestination = new byte[byteSource.length]), 1, 4);
+			assertArrayEquals(bytes(zero, one, two, three, four), byteDestination);
+
+			ArrayUtils.copy(byteSource, (byteDestination = new byte[byteSource.length]), 1, 5);
+			assertArrayEquals(bytes(zero, one, two, three, four), byteDestination);
+
+			ArrayUtils.copy(byteSource, (byteDestination = new byte[byteSource.length + 1]), 1, 5);
+			assertArrayEquals(bytes(zero, one, two, three, four, zero), byteDestination);
+		}
 
 		short[] shortSource = new short[] { 0, 1, 2, 3, 4 };
 		short[] shortDestination = new short[shortSource.length];
-		ArrayUtils.copy(shortSource, shortDestination);
-		assertArrayEquals(shortSource, shortDestination);
+		{
+			short zero = 0;
+			short one = 1;
+			short two = 2;
+			short three = 3;
+			short four = 4;
+
+			ArrayUtils.copy(shortSource, shortDestination);
+			assertArrayEquals(shortSource, shortDestination);
+
+			ArrayUtils.copy(shortSource, (shortDestination = new short[shortSource.length]), 1);
+			assertArrayEquals(shorts(zero, one, two, three, four), shortDestination);
+
+			ArrayUtils.copy(shortSource, (shortDestination = new short[shortSource.length]), 1, 3);
+			assertArrayEquals(shorts(zero, one, two, three, zero), shortDestination);
+
+			ArrayUtils.copy(shortSource, (shortDestination = new short[shortSource.length]), 1, 4);
+			assertArrayEquals(shorts(zero, one, two, three, four), shortDestination);
+
+			ArrayUtils.copy(shortSource, (shortDestination = new short[shortSource.length]), 1, 5);
+			assertArrayEquals(shorts(zero, one, two, three, four), shortDestination);
+
+			ArrayUtils.copy(shortSource, (shortDestination = new short[shortSource.length + 1]), 1, 5);
+			assertArrayEquals(shorts(zero, one, two, three, four, zero), shortDestination);
+		}
 
 		int[] intSource = new int[] { 0, 1, 2, 3, 4 };
 		int[] intDestination = new int[intSource.length];
-		ArrayUtils.copy(intSource, intDestination);
-		assertArrayEquals(intSource, intDestination);
+		{
+			ArrayUtils.copy(intSource, intDestination);
+			assertArrayEquals(intSource, intDestination);
+
+			ArrayUtils.copy(intSource, intDestination);
+			assertArrayEquals(intSource, intDestination);
+
+			ArrayUtils.copy(intSource, (intDestination = new int[intSource.length]), 1);
+			assertArrayEquals(ints(0, 1, 2, 3, 4), intDestination);
+
+			ArrayUtils.copy(intSource, (intDestination = new int[intSource.length]), 1, 3);
+			assertArrayEquals(ints(0, 1, 2, 3, 0), intDestination);
+
+			ArrayUtils.copy(intSource, (intDestination = new int[intSource.length]), 1, 4);
+			assertArrayEquals(ints(0, 1, 2, 3, 4), intDestination);
+
+			ArrayUtils.copy(intSource, (intDestination = new int[intSource.length]), 1, 5);
+			assertArrayEquals(ints(0, 1, 2, 3, 4), intDestination);
+
+			ArrayUtils.copy(intSource, (intDestination = new int[intSource.length + 1]), 1, 5);
+			assertArrayEquals(ints(0, 1, 2, 3, 4, 0), intDestination);
+		}
 
 		long[] longSource = new long[] { 0L, 1L, 2L, 3L, 4L };
 		long[] longDestination = new long[longSource.length];
-		ArrayUtils.copy(longSource, longDestination);
-		assertArrayEquals(longSource, longDestination);
+		{
+			ArrayUtils.copy(longSource, longDestination);
+			assertArrayEquals(longSource, longDestination);
+
+			ArrayUtils.copy(longSource, longDestination);
+			assertArrayEquals(longSource, longDestination);
+
+			ArrayUtils.copy(longSource, (longDestination = new long[longSource.length]), 1);
+			assertArrayEquals(longs(0, 1, 2, 3, 4), longDestination);
+
+			ArrayUtils.copy(longSource, (longDestination = new long[longSource.length]), 1, 3);
+			assertArrayEquals(longs(0, 1, 2, 3, 0), longDestination);
+
+			ArrayUtils.copy(longSource, (longDestination = new long[longSource.length]), 1, 4);
+			assertArrayEquals(longs(0, 1, 2, 3, 4), longDestination);
+
+			ArrayUtils.copy(longSource, (longDestination = new long[longSource.length]), 1, 5);
+			assertArrayEquals(longs(0, 1, 2, 3, 4), longDestination);
+
+			ArrayUtils.copy(longSource, (longDestination = new long[longSource.length + 1]), 1, 5);
+			assertArrayEquals(longs(0, 1, 2, 3, 4, 0), longDestination);
+		}
 
 		float[] floatSource = new float[] { 0F, 1F, 2F, 3F, 4F };
 		float[] floatDestination = new float[floatSource.length];
-		ArrayUtils.copy(floatSource, floatDestination);
-		assertArrayEquals(floatSource, floatDestination);
+		{
+			ArrayUtils.copy(floatSource, floatDestination);
+			assertArrayEquals(floatSource, floatDestination);
+
+			ArrayUtils.copy(floatSource, floatDestination);
+			assertArrayEquals(floatSource, floatDestination);
+
+			ArrayUtils.copy(floatSource, (floatDestination = new float[floatSource.length]), 1);
+			assertArrayEquals(floats(0, 1, 2, 3, 4), floatDestination);
+
+			ArrayUtils.copy(floatSource, (floatDestination = new float[floatSource.length]), 1, 3);
+			assertArrayEquals(floats(0, 1, 2, 3, 0), floatDestination);
+
+			ArrayUtils.copy(floatSource, (floatDestination = new float[floatSource.length]), 1, 4);
+			assertArrayEquals(floats(0, 1, 2, 3, 4), floatDestination);
+
+			ArrayUtils.copy(floatSource, (floatDestination = new float[floatSource.length]), 1, 5);
+			assertArrayEquals(floats(0, 1, 2, 3, 4), floatDestination);
+
+			ArrayUtils.copy(floatSource, (floatDestination = new float[floatSource.length + 1]), 1, 5);
+			assertArrayEquals(floats(0, 1, 2, 3, 4, 0), floatDestination);
+		}
 
 		double[] doubleSource = new double[] { 0D, 1D, 2D, 3D, 4D };
 		double[] doubleDestination = new double[doubleSource.length];
-		ArrayUtils.copy(doubleSource, doubleDestination);
-		assertArrayEquals(doubleSource, doubleDestination);
+		{
+			ArrayUtils.copy(doubleSource, doubleDestination);
+			assertArrayEquals(doubleSource, doubleDestination);
+
+			ArrayUtils.copy(doubleSource, doubleDestination);
+			assertArrayEquals(doubleSource, doubleDestination);
+
+			ArrayUtils.copy(doubleSource, (doubleDestination = new double[doubleSource.length]), 1);
+			assertArrayEquals(doubles(0, 1, 2, 3, 4), doubleDestination);
+
+			ArrayUtils.copy(doubleSource, (doubleDestination = new double[doubleSource.length]), 1, 3);
+			assertArrayEquals(doubles(0, 1, 2, 3, 0), doubleDestination);
+
+			ArrayUtils.copy(doubleSource, (doubleDestination = new double[doubleSource.length]), 1, 4);
+			assertArrayEquals(doubles(0, 1, 2, 3, 4), doubleDestination);
+
+			ArrayUtils.copy(doubleSource, (doubleDestination = new double[doubleSource.length]), 1, 5);
+			assertArrayEquals(doubles(0, 1, 2, 3, 4), doubleDestination);
+
+			ArrayUtils.copy(doubleSource, (doubleDestination = new double[doubleSource.length + 1]), 1, 5);
+			assertArrayEquals(doubles(0, 1, 2, 3, 4, 0), doubleDestination);
+		}
 
 		char[] charSource = new char[] { 0, 1, 2, 3, 4 };
 		char[] charDestination = new char[charSource.length];
-		ArrayUtils.copy(charSource, charDestination);
-		assertArrayEquals(charSource, charDestination);
+		{
+			char zero = 0;
+			char one = 1;
+			char two = 2;
+			char three = 3;
+			char four = 4;
+
+			ArrayUtils.copy(charSource, charDestination);
+			assertArrayEquals(charSource, charDestination);
+
+			ArrayUtils.copy(charSource, (charDestination = new char[charSource.length]), 1);
+			assertArrayEquals(chars(zero, one, two, three, four), charDestination);
+
+			ArrayUtils.copy(charSource, (charDestination = new char[charSource.length]), 1, 3);
+			assertArrayEquals(chars(zero, one, two, three, zero), charDestination);
+
+			ArrayUtils.copy(charSource, (charDestination = new char[charSource.length]), 1, 4);
+			assertArrayEquals(chars(zero, one, two, three, four), charDestination);
+
+			ArrayUtils.copy(charSource, (charDestination = new char[charSource.length]), 1, 5);
+			assertArrayEquals(chars(zero, one, two, three, four), charDestination);
+
+			ArrayUtils.copy(charSource, (charDestination = new char[charSource.length + 1]), 1, 5);
+			assertArrayEquals(chars(zero, one, two, three, four, zero), charDestination);
+		}
 
 		boolean[] booleanSource = new boolean[] { true, false, true, false, true };
 		boolean[] booleanDestination = new boolean[booleanSource.length];
-		ArrayUtils.copy(booleanSource, booleanDestination);
-		assertArrayEquals(booleanSource, booleanDestination);
+		{
+			ArrayUtils.copy(booleanSource, booleanDestination);
+			assertArrayEquals(booleanSource, booleanDestination);
+
+			ArrayUtils.copy(booleanSource, (booleanDestination = new boolean[booleanSource.length]), 1);
+			assertArrayEquals(booleans(false, false, true, false, true), booleanDestination);
+
+			ArrayUtils.copy(booleanSource, (booleanDestination = new boolean[booleanSource.length]), 1, 3);
+			assertArrayEquals(booleans(false, false, true, false, false), booleanDestination);
+
+			ArrayUtils.copy(booleanSource, (booleanDestination = new boolean[booleanSource.length]), 1, 4);
+			assertArrayEquals(booleans(false, false, true, false, true), booleanDestination);
+
+			ArrayUtils.copy(booleanSource, (booleanDestination = new boolean[booleanSource.length]), 1, 5);
+			assertArrayEquals(booleans(false, false, true, false, true), booleanDestination);
+
+			ArrayUtils.copy(booleanSource, (booleanDestination = new boolean[booleanSource.length + 1]), 1, 5);
+			assertArrayEquals(booleans(false, false, true, false, true, false), booleanDestination);
+		}
 	}
 
 	@SafeVarargs

@@ -380,51 +380,142 @@ public class ArrayUtils
 			destination[i] = source[i];
 	}
 
+	public static <D> void copy(D[] data, D[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static <D> void copy(D[] source, D[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
+			destination[i] = source[i];
+	}
+
 	public static void copy(byte[] source, byte[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(byte[] data, byte[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(byte[] source, byte[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(short[] source, short[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(short[] data, short[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(short[] source, short[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(int[] source, int[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(int[] data, int[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(long[] source, long[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(long[] source, long[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(long[] data, long[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(float[] source, float[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(float[] source, float[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(float[] data, float[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(double[] source, double[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(double[] source, double[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
-			destination[i] = source[i];
+		copy(source, destination, 0, source.length);
 	}
 
-	public static void copy(boolean[] source, boolean[] destination)
+	public static void copy(double[] data, double[] destination, int offset)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(char[] source, char[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 
 	public static void copy(char[] source, char[] destination)
 	{
-		for (int i = 0; i < source.length && i < destination.length; i++)
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(char[] data, char[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(boolean[] source, boolean[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
+			destination[i] = source[i];
+	}
+
+	public static void copy(boolean[] source, boolean[] destination)
+	{
+		copy(source, destination, 0, source.length);
+	}
+
+	public static void copy(boolean[] data, boolean[] destination, int offset)
+	{
+		copy(data, destination, offset, data.length);
+	}
+
+	public static void copy(int[] source, int[] destination, int offset, int length)
+	{
+		for (int i = offset; i < source.length && i < destination.length && i < length + offset; i++)
 			destination[i] = source[i];
 	}
 }
